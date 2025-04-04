@@ -1,88 +1,49 @@
-import React, { useState } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+import { Card, CardContent } from "@components/ui/card";
+import { Button } from "@components/ui/button";
 import { Eye } from "lucide-react";
 
 const proposals = [
   {
     title: "Reply to Job Invite",
-    description: "Got an invite for a job? Then use this template to reply.",
-    prompt: `{Write a sentence expressing my appreciation for being invited to the job and how I am ready to get started and help them with their goals. For the next paragraph, briefly describe how I can help them with their job referencing any related skills, experiences, or projects that I have previously done that closely align with their project.}
-
-{Include a sentence that starts with "For more information me and examples of my work, please review my Upwork Profile at (include link to Upwork Profile URL)}
-
-I know you are reviewing a lot of proposals and I hope you will 𝗺𝗲𝘀𝘀𝗮𝗴𝗲 𝗺𝗲 𝗼𝗻 𝗨𝗽𝘄𝗼𝗿𝗸 so we can discuss your project in more detail. Thank you again for the invitation and I look forward to speaking with you soon.
-
-{Write out my name, profession, and a link to my Upwork Profile (if available). For example:
-Daniel Reiling
-Mobile App Developer
-https://www.upwork.com/freelancers/reiling
-Instruction: Use Mathematical Italic Bold for the name and profession only.}`
+    description:
+      "Got an invite for a job? Then use this template to reply!",
+    prompt: `Write a sentence expressing my appreciation for being invited to the job and how I am ready to get started and help them with their goals. For the next paragraph, briefly describe how I can help them by referencing any related skills, experiences, or projects that I have previously done that closely align with their project. Include a sentence that asks for more information and examples of my work. Please review my Upwork Profile at {Upwork Profile URL}.`,
   },
   {
     title: "Basic Cover Letter",
-    description: "A general purpose template that showcases your relevant skills and experiences.",
-    prompt: `{Write a sentence expressing my enthusiasm for their project and how my skills and experience can help them. Write a second sentence that highlights the benefit of working with me.}
-
-𝗦𝗶𝗺𝗶𝗹𝗮𝗿 𝗣𝗿𝗼𝗷𝗲𝗰𝘁𝘀
-I have successfully completed several similar projects for clients including:
-
-{Create a list of one to three projects I have completed that are most relevant to the job requirements. Include the name of the project (in bold) and a one-sentence description. Make the description relevant to the job. Below the description, include the word Relevant Skills: in bold and list one to three skills relevant to the job description. If I do not have any past projects similar to the job, write the line "🚨𝗔𝗟𝗘𝗥𝗧: Add more Past Projects to your PouncerAI Profile at https://app.pouncer.ai/dashboard/profiles/"}
-
-Please feel free to check out my portfolio at {Upwork Portfolio URL:} to see additional examples of my work.
-
-I’d love to chat more about your project so 𝗽𝗹𝗲𝗮𝘀𝗲 𝗺𝗲𝘀𝘀𝗮𝗴𝗲 𝗺𝗲 𝗼𝗻 𝗨𝗽𝘄𝗼𝗿𝗸.
-
-Excited to work with you!
-
-{Write out my name, profession, and a link to my Upwork Profile (if available). For example:
-Daniel Reiling
-Mobile App Developer
-https://www.upwork.com/freelancers/reiling
-Instruction: Use Mathematical Italic Bold for the name and profession only.}`
+    description:
+      "A general purpose template that showcases your relevant skills and experiences.",
+    prompt: `Write a sentence expressing my enthusiasm for their project and how my skills can help them. Write a second sentence that highlights the benefit of working with me. Similar Projects: I have successfully completed several similar projects for clients including: {List one to three relevant projects}. Please message me on Upwork.`,
   },
   {
     title: "My Approach",
-    description: "Demonstrate that you understand the clients need by discussing your approach.",
-    prompt: `{Write two sentences that provide a direct response to the client's needs or a statement demonstrating understanding of the project's goals while referencing my expertise with what they need. Include an emoji at the beginning of the first sentence that is relevant to the job.} 𝗛𝗲𝗿𝗲 𝗶𝘀 𝗵𝗼𝘄 𝗜 𝘄𝗼𝘂𝗹𝗱 𝗮𝗽𝗽𝗿𝗼𝗮𝗰𝗵 𝘆𝗼𝘂𝗿 𝗽𝗿𝗼𝗷𝗲𝗰𝘁.
-
-{Create a list of 2 to 4 ways that I would approach this project to meet the requirements of the job description. Add a line break after each question.}  
-
-𝗪𝗵𝘆 𝗪𝗼𝗿𝗸 𝗪𝗶𝘁𝗵 𝗠𝗲
-{Write a sentence that introduces me to the client and highlights my skills related to the project description. Keep your response to less than 50 words.} You can learn more about my skills & experiences at {Upwork Profile URL:}.  
-
-Please 𝗺𝗲𝘀𝘀𝗮𝗴𝗲 𝗺𝗲 𝗼𝗻 𝗨𝗽𝘄𝗼𝗿𝗸 so we can discuss your project in more detail. I can then provide you with a final estimate to complete the work. Thank you for your consideration.  
-
-{Write out my name, profession, and a link to my Upwork Profile (if available).}`
-  }
+    description:
+      "Demonstrate that you understand the client's needs by discussing your approach.",
+    prompt: `Write two sentences that provide a direct response to the client's needs or a statement demonstrating understanding of the project's goals while referencing my expertise. Here is how I would approach your project: {Write a list of 2 to 4 ways I would handle the project requirements}. Please message me on Upwork.`,
+  },
 ];
 
 export default function Page() {
   const [selectedPrompt, setSelectedPrompt] = useState(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Upwork Proposal Templates</h1>
       {proposals.map((proposal, index) => (
-        <Card key={index} className="shadow-xl border border-gray-300">
+        <Card key={index} className="mb-4 shadow-md">
           <CardContent className="p-4">
-            <h2 className="font-bold text-lg mb-2">{proposal.title}</h2>
-            <p className="text-sm mb-4">{proposal.description}</p>
-            <div className="flex items-center justify-between gap-2">
-              <Button
-                onClick={() => alert(`Generated Proposal for ${proposal.title}`)}
-              >
-                Generate
-              </Button>
-              <button
-                onClick={() => setSelectedPrompt(proposal.prompt)}
-                className="text-gray-600 hover:text-black"
-              >
-                <Eye className="w-5 h-5" />
-              </button>
-            </div>
+            <h2 className="text-xl font-semibold">{proposal.title}</h2>
+            <p className="text-gray-600 mb-2">{proposal.description}</p>
+            <Button
+              onClick={() => setSelectedPrompt(proposal.prompt)}
+              className="text-gray-600 hover:text-black"
+            >
+              Generate
+            </Button>
             {selectedPrompt === proposal.prompt && (
-              <div className="mt-4 p-2 bg-gray-100 text-sm whitespace-pre-wrap">
-                {proposal.prompt}
+              <div className="mt-4 p-3 border rounded bg-gray-100">
+                <p>{selectedPrompt}</p>
               </div>
             )}
           </CardContent>
