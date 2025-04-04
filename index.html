@@ -1,0 +1,42 @@
+<!-- Ahmad Salar's AI Proposal Writer Tool (No-code Version) -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Upwork Proposal Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    textarea, input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
+    button { background-color: #3b82f6; color: white; border: none; font-weight: bold; cursor: pointer; }
+    #output { white-space: pre-wrap; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Upwork Proposal Generator</h2>
+
+  <label>Job Title:</label>
+  <input type="text" id="jobTitle" placeholder="e.g. Build a WooCommerce Store">
+
+  <label>Job Description:</label>
+  <textarea id="jobDescription" rows="5" placeholder="Paste the job description here..."></textarea>
+
+  <button onclick="generateProposal()">Generate Proposal</button>
+
+  <div id="output"></div>
+
+  <script>
+    const profileTitle = "Responsive WordPress Designer | Creating Stunning, Fast & Secure Sites";
+    const profileOverview = `🏅 Certified WordPress Designer\n🤝 Client-Centric Approach\n\nI’m Ahmad Salar, a Responsive WordPress Designer delivering high-impact, conversion-optimized websites. With expertise from LexusCode Developers, I craft SEO-powered, visually compelling, and user-centric designs that elevate brands and drive measurable success.\n\nLet’s build a website that’s not just beautiful—but fast, engaging, and built to grow your business.`;
+    const profileSkills = "Ecommerce, WordPress, WordPress Backup, WordPress Bug Fix, WordPress Customization, WordPress Installation, WordPress Landing Page, WordPress Migration, WordPress Optimization, WordPress Security, Search Engine Optimization, WooCommerce, Elementor, WordPress e-Commerce, WordPress Website Design";
+
+    function generateProposal() {
+      const title = document.getElementById("jobTitle").value;
+      const description = document.getElementById("jobDescription").value;
+
+      const prompt = `Write a personalized and professional Upwork proposal for the following job.\n\nJob Title: ${title}\n\nJob Description: ${description}\n\nFreelancer Profile Title: ${profileTitle}\n\nProfile Overview: ${profileOverview}\n\nSkills: ${profileSkills}\n\nMake sure the proposal sounds human, confident, and relevant to the job.`;
+
+      document.getElementById("output").innerText = prompt;
+    }
+  </script>
+</body>
+</html>
